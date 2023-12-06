@@ -13,6 +13,10 @@ sealed class ImageConstants {
   static const client = 'assets/images/courier.png';
   static const shipments = 'assets/images/clipboard.png';
   static const boxBoarding = 'assets/images/drop-shipping.png';
+  static const truck = 'assets/images/truck.png';
+  static const planes = 'assets/images/planes.png';
+  static const train = 'assets/images/train.png';
+  static const ship = 'assets/images/ship.png';
 
 }
 

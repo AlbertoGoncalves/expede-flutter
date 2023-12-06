@@ -55,7 +55,7 @@ class BrowserCustomersPage extends ConsumerWidget {
           );
         },
         error: (error, stackTrace) {
-          log('Erro ao carregar colaboradores',
+          log('Erro ao carregar Clientes',
               error: error, stackTrace: stackTrace);
           return const Center(
             child: Text('Erro ao carregar pagina'),

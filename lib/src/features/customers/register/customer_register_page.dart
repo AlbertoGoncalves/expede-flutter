@@ -1,10 +1,10 @@
 import 'package:expede/src/core/ui/helpers/form_helper.dart';
 import 'package:expede/src/core/ui/helpers/messages.dart';
 import 'package:expede/src/core/ui/widgets/avatar_widget.dart';
-import 'package:expede/src/core/ui/widgets/hours_panel.dart';
-import 'package:expede/src/core/ui/widgets/weekdays_panel.dart';
+import 'package:expede/src/features/customers/browser_customers/browser_customers_vm.dart';
 import 'package:expede/src/features/customers/register/customer_register_state.dart';
 import 'package:expede/src/features/customers/register/customer_register_vm.dart';
+import 'package:expede/src/model/customer_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:validatorless/validatorless.dart';
@@ -22,6 +22,8 @@ class _CustomerRegisterPageState extends ConsumerState<CustomerRegisterPage> {
   final nameEC = TextEditingController();
   final emailEC = TextEditingController();
   final addressEC = TextEditingController();
+  var registerOrAlter = true;
+  int customerId = 0;
 
   @override
   void dispose() {
@@ -33,6 +35,19 @@ class _CustomerRegisterPageState extends ConsumerState<CustomerRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      final customer =
+          ModalRoute.of(context)!.settings.arguments as CustomerModel;
+      nameEC.text.isEmpty ? nameEC.text = customer.name : nameEC.text;
+      emailEC.text.isEmpty ? emailEC.text = customer.email : emailEC.text;
+      addressEC.text.isEmpty
+          ? addressEC.text = customer.address
+          : addressEC.text;
+      customerId == 0 ? customerId = customer.id : customerId;
+
+      registerOrAlter = false;
+    }
+
     final customerRegisterVM = ref.watch(customerRegisterVmProvider.notifier);
 
     ref.listen(customerRegisterVmProvider.select((state) => state.status),
@@ -41,8 +56,14 @@ class _CustomerRegisterPageState extends ConsumerState<CustomerRegisterPage> {
         case CustomerRegisterStateStatus.initial:
           break;
         case CustomerRegisterStateStatus.success:
-          Messages.showSuccess('Cliente cadastrado com sucesso', context);
+          if (registerOrAlter) {
+            Messages.showSuccess('Cliente cadastrado com sucesso', context);
+          } else {
+            Messages.showSuccess('Cliente alterado com sucesso', context);
+          }
           Navigator.of(context).pop();
+          ref.invalidate(customerRegisterVmProvider);
+          ref.invalidate(browserCustomersVmProvider);
         case CustomerRegisterStateStatus.error:
           Messages.showError('Erro ao registrar Cliente', context);
       }
@@ -123,15 +144,24 @@ class _CustomerRegisterPageState extends ConsumerState<CustomerRegisterPage> {
                           final name = nameEC.text;
                           final email = emailEC.text;
                           final address = addressEC.text;
-                          customerRegisterVM.register(
-                            name: name,
-                            email: email,
-                            address: address,
-                          );
+                          if (registerOrAlter) {
+                            customerRegisterVM.register(
+                              name: name,
+                              email: email,
+                              address: address,
+                            );
+                          } else {
+                            customerRegisterVM.alter(
+                              id: customerId,
+                              name: name,
+                              email: email,
+                              address: address,
+                            );
+                          }
                       }
                     },
-                    child: const Text(
-                      'Cadastrar Cliente',
+                    child: Text(
+                      registerOrAlter ? 'Cadastrar Cliente' : 'Alterar Cliente',
                     ),
                   ),
                   const SizedBox(

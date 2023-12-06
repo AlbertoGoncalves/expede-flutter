@@ -115,7 +115,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                       hintText: "Selecione uma data",
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       suffix: Icon(
-                        AppIcons.calendar,
+                       AppIcons.calendar,
                         color: ColorsConstants.brow,
                         size: 18,
                       ),

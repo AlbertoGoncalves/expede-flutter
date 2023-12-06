@@ -20,6 +20,36 @@ final restClientProvider = Provider<RestClient>.internal(
 );
 
 typedef RestClientRef = ProviderRef<RestClient>;
+String _$mqttRestClientHash() => r'1dbeccb82d86800fc1fedc9943b254206f4329f1';
+
+/// See also [mqttRestClient].
+@ProviderFor(mqttRestClient)
+final mqttRestClientProvider = Provider<MqttRestClient>.internal(
+  mqttRestClient,
+  name: r'mqttRestClientProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$mqttRestClientHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef MqttRestClientRef = ProviderRef<MqttRestClient>;
+String _$mqttRepositoryHash() => r'e88fdc5a8e29feadbfbf1f558a5d93051f0c4085';
+
+/// See also [mqttRepository].
+@ProviderFor(mqttRepository)
+final mqttRepositoryProvider = Provider<DeviceRepository>.internal(
+  mqttRepository,
+  name: r'mqttRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$mqttRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef MqttRepositoryRef = ProviderRef<DeviceRepository>;
 String _$userRepositoryHash() => r'4a324f69804b6738f220b7c48b19aad627021894';
 
 /// See also [userRepository].
@@ -51,6 +81,39 @@ final customerRepositoryProvider = Provider<CustomerRepository>.internal(
 );
 
 typedef CustomerRepositoryRef = ProviderRef<CustomerRepository>;
+String _$shipmentRepositoryHash() =>
+    r'6ccd00accdc1ef5e3717bb7a01bbd2b4af8888dc';
+
+/// See also [shipmentRepository].
+@ProviderFor(shipmentRepository)
+final shipmentRepositoryProvider = Provider<ShipmentRepository>.internal(
+  shipmentRepository,
+  name: r'shipmentRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$shipmentRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ShipmentRepositoryRef = ProviderRef<ShipmentRepository>;
+String _$itemsShipmentRepositoryHash() =>
+    r'351a059f9be6d5b388b7f8e413778614616ed84b';
+
+/// See also [itemsShipmentRepository].
+@ProviderFor(itemsShipmentRepository)
+final itemsShipmentRepositoryProvider =
+    Provider<ItemShipmentRepository>.internal(
+  itemsShipmentRepository,
+  name: r'itemsShipmentRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$itemsShipmentRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ItemsShipmentRepositoryRef = ProviderRef<ItemShipmentRepository>;
 String _$userLoginServiceHash() => r'62431221aac8e45888e74928ecf0b5836e72b999';
 
 /// See also [userLoginService].

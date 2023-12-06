@@ -7,7 +7,7 @@ part of 'customer_register_vm.dart';
 // **************************************************************************
 
 String _$customerRegisterVmHash() =>
-    r'858b5947bd480387e5709d00f5e7cd69425de06e';
+    r'd816bf66de5b11864978a910badcf116ca7d6613';
 
 /// See also [CustomerRegisterVm].
 @ProviderFor(CustomerRegisterVm)

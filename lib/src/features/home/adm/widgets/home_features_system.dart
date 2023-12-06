@@ -7,70 +7,98 @@ class HomeFeaturesSystem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
-          Row(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () async {
+                await Navigator.of(context)
+                    .pushNamed('/home/browser/customers');
+                // ref.invalidate(getMeProvider);
+                // ref.invalidate(homeAdmVmProvider);
+              },
+              child: const Feature(
+                name: 'Clientes',
+                image: ImageConstants.client,
+              ),
+            ),
+            InkWell(
+              onTap: () async {
+                await Navigator.of(context)
+                    .pushNamed('/home/browser/employees');
+                // ref.invalidate(getMeProvider);
+                // ref.invalidate(homeAdmVmProvider);
+              },
+              child: const Feature(
+                name: 'Usuarios',
+                image: ImageConstants.client,
+              ),
+            ),
+          ],
+        ),
+        InkWell(
+          onTap: () async {
+            await Navigator.of(context).pushNamed('/employee/register');
+            // ref.invalidate(getMeProvider);
+            // ref.invalidate(homeAdmVmProvider);
+          },
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
                 onTap: () async {
-                  await Navigator.of(context).pushNamed('/home/browser/customers');
+                  await Navigator.of(context)
+                      .pushNamed('/home/browser/shipments');
                   // ref.invalidate(getMeProvider);
                   // ref.invalidate(homeAdmVmProvider);
                 },
                 child: const Feature(
-                  name: 'Clientes',
-                  image: ImageConstants.client,
+                  name: 'Carregamento',
+                  image: ImageConstants.shipments,
                 ),
               ),
               InkWell(
                 onTap: () async {
-                  await Navigator.of(context).pushNamed('/home/browser/employees');
+                  await Navigator.of(context)
+                      .pushNamed('/home/browser/items_shipment');
                   // ref.invalidate(getMeProvider);
                   // ref.invalidate(homeAdmVmProvider);
                 },
                 child: const Feature(
-                  name: 'Usuarios',
-                  image: ImageConstants.client,
+                  name: 'Cargas',
+                  image: ImageConstants.boxBoarding,
                 ),
               ),
             ],
           ),
-          InkWell(
-            onTap: () async {
-                  await Navigator.of(context).pushNamed('/employee/register');
+        ),
+        InkWell(
+          onTap: () async {
+            await Navigator.of(context).pushNamed('/employee/register');
+            // ref.invalidate(getMeProvider);
+            // ref.invalidate(homeAdmVmProvider);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () async {
+                  await Navigator.of(context)
+                      .pushNamed('/mqtt/conected');
                   // ref.invalidate(getMeProvider);
                   // ref.invalidate(homeAdmVmProvider);
                 },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () async {
-                  await Navigator.of(context).pushNamed('/employee/register');
-                  // ref.invalidate(getMeProvider);
-                  // ref.invalidate(homeAdmVmProvider);
-                },
-                  child: const Feature(
-                    name: 'Carregamento',
-                    image: ImageConstants.shipments,
-                  ),
+                child: const Feature(
+                  name: 'Mqtt',
+                  image: ImageConstants.shipments,
                 ),
-                InkWell(
-                  onTap: () async {
-                  await Navigator.of(context).pushNamed('/employee/register');
-                  // ref.invalidate(getMeProvider);
-                  // ref.invalidate(homeAdmVmProvider);
-                },
-                  child: const Feature(
-                    name: 'Cargas',
-                    image: ImageConstants.boxBoarding,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }
 

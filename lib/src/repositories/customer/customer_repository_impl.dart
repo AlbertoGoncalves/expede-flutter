@@ -23,14 +23,11 @@ class CustomerRepositoryImpl implements CustomerRepository {
       final customers = data.map((e) => CustomerModel.fromMap(e)).toList();
       return Success(customers);
     } on DioException catch (e, s) {
-      log('Erro ao buscar colaboradores', error: e, stackTrace: s);
-      return Failure(
-          RepositoryException(message: 'Erro ao buscar colaboradores'));
+      log('Erro ao buscar Clientes', error: e, stackTrace: s);
+      return Failure(RepositoryException(message: 'Erro ao buscar Clientes'));
     } on ArgumentError catch (e, s) {
-      log('Erro ao converter colaboradores (Invalid Json)',
-          error: e, stackTrace: s);
-      return Failure(
-          RepositoryException(message: 'Erro ao buscar colaboradores'));
+      log('Erro ao converter Clientes (Invalid Json)', error: e, stackTrace: s);
+      return Failure(RepositoryException(message: 'Erro ao buscar Clientes'));
     }
   }
 
@@ -52,10 +49,53 @@ class CustomerRepositoryImpl implements CustomerRepository {
 
       return Success(nil);
     } on DioException catch (e, s) {
-      log('Erro ao inserir administrador como colaborador',
+      log('Erro ao inserir customers',
           error: e, stackTrace: s);
       return Failure(RepositoryException(
-          message: 'Erro ao inserir administrador como colaborador'));
+          message: 'Erro ao inserir customers'));
+    }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> alterCustomer(
+      ({
+        int id,
+        int companyId,
+        String name,
+        String email,
+        String address,
+      }) customerModel) async {
+    try {
+      await restClient.auth.patch('/customers/${customerModel.id}', data: {
+        'id': customerModel.id,
+        'company_id': customerModel.companyId,
+        'name': customerModel.name,
+        'email': customerModel.email,
+        'address': customerModel.address,
+      });
+
+      return Success(nil);
+    } on DioException catch (e, s) {
+      log('Erro ao alter customers',
+          error: e, stackTrace: s);
+      return Failure(RepositoryException(
+          message: 'Erro ao alter customers'));
+    }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> deleteCustomer(
+      ({int id}) customerModel) async {
+    try {
+      await restClient.auth.delete('/customers/${customerModel.id}',
+          data: {'id': customerModel.id});
+
+      return Success(nil);
+    } on DioException catch (e, s) {
+      log('Erro ao excluir customers',
+          error: e, stackTrace: s);
+      return Failure(RepositoryException(
+          message: 'Erro ao excluir customers'));
     }
   }
 }

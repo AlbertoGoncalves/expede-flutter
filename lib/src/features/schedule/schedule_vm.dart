@@ -33,7 +33,7 @@ class ScheduleVm extends _$ScheduleVm {
 
     final ScheduleState(:scheduleDate, :scheduleHour) = state;
     final scheduleRepository = ref.read(scheduleRepositoryProvider);
-    final CompanyModel(id: companyId) =
+    final  CompanyModel(id: companyId) =
         await ref.watch(getMyCompanyProvider.future);
 
     final dto = (

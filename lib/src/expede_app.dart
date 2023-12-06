@@ -1,4 +1,5 @@
 import 'package:asyncstate/asyncstate.dart';
+import 'package:expede/src/features/device/device_page.dart';
 import 'package:expede/src/core/ui/app_nav_global_key.dart';
 import 'package:expede/src/core/ui/app_theme.dart';
 import 'package:expede/src/core/ui/widgets/app_loader.dart';
@@ -12,7 +13,12 @@ import 'package:expede/src/features/employee/register/employee_register_page.dar
 import 'package:expede/src/features/employee/schedule/employee_schedule_page.dart';
 import 'package:expede/src/features/home/adm/home_adm_page.dart';
 import 'package:expede/src/features/home/employee/home_employee_page.dart';
+import 'package:expede/src/features/items_shipment/browser_items_shipment/browser_items_for_shipment_page.dart';
+import 'package:expede/src/features/items_shipment/browser_items_shipment/browser_items_shipment_page.dart';
+import 'package:expede/src/features/items_shipment/register/item_shipment_register_page.dart';
 import 'package:expede/src/features/schedule/schedule_page.dart';
+import 'package:expede/src/features/shipment/browser_shipment/browser_shipment_page.dart';
+import 'package:expede/src/features/shipment/register/shipment_register_page.dart';
 import 'package:expede/src/features/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -40,15 +46,17 @@ class ExpedeApp extends StatelessWidget {
             '/employee/register': (_) => const EmployeeRegisterPage(),
             '/home/browser/customers': (_) => const BrowserCustomersPage(),
             '/customer/register': (_) => const CustomerRegisterPage(),
+
+            '/mqtt/conected': (_) => const DevicePage(),
             
-            '/home/browser/shipments': (_) => const Text('shipment/register'),
-            '/shipment/register': (_) => const Text('shipment/register'),
-            '/home/browser/items_shipment': (_) => const Text('home/browser/items_shipment'),
-            '/item_shipment/register': (_) => const Text('/item_shipment/register'),
+            '/home/browser/shipments': (_) => const BrowserShipmentPage(),
+            '/home/browser/items_for_shipment': (_) => const BrowserItemsForShipmentPage(),
+            '/shipment/register': (_) => const ShipmentRegisterPage(),
+
+            '/home/browser/items_shipment': (_) => const BrowserItemsShipmentPage(),
+            '/item_shipment/register': (_) => const ItemShipmentRegisterPage(),
             
             '/home/employee': (_) => const HomeEmployeePage(),
-            '/employee/schedule': (_) => const EmployeeSchedulePage(),
-            '/schedule': (_) => const SchedulePage(),
           },
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,

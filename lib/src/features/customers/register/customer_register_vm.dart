@@ -11,7 +11,11 @@ class CustomerRegisterVm extends _$CustomerRegisterVm {
   @override
   CustomerRegisterState build() => CustomerRegisterState.initial();
 
-  Future<void> register({String? name, String? email, String? address}) async {
+  Future<void> register({
+    String? name,
+    String? email,
+    String? address,
+  }) async {
     final customerRepository = ref.watch(customerRepositoryProvider);
 
     final CompanyModel(:id) = await ref.watch(getMyCompanyProvider.future);
@@ -24,6 +28,52 @@ class CustomerRegisterVm extends _$CustomerRegisterVm {
     );
 
     final resulRegister = await customerRepository.registerCustomer(dto);
+
+    switch (resulRegister) {
+      case Success():
+        state = state.copyWith(status: CustomerRegisterStateStatus.success);
+      case Failure():
+        state = state.copyWith(status: CustomerRegisterStateStatus.error);
+    }
+  }
+
+  Future<void> alter({
+    int? id,
+    String? name,
+    String? email,
+    String? address,
+  }) async {
+    final customerRepository = ref.watch(customerRepositoryProvider);
+
+    final CompanyModel(id: companyId) =
+        await ref.watch(getMyCompanyProvider.future);
+
+    final dto = (
+      id: id!,
+      companyId: companyId,
+      name: name!,
+      email: email!,
+      address: address!,
+    );
+
+    final resulRegister = await customerRepository.alterCustomer(dto);
+
+    switch (resulRegister) {
+      case Success():
+        state = state.copyWith(status: CustomerRegisterStateStatus.success);
+      case Failure():
+        state = state.copyWith(status: CustomerRegisterStateStatus.error);
+    }
+  }
+
+  Future<void> delete({
+    int? id,
+  }) async {
+    final customerRepository = ref.watch(customerRepositoryProvider);
+
+    final dto = (id: id!);
+
+    final resulRegister = await customerRepository.deleteCustomer(dto);
 
     switch (resulRegister) {
       case Success():

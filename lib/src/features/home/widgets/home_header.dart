@@ -45,9 +45,16 @@ class HomeHeader extends ConsumerWidget {
             data: (companyData) {
               return Row(
                 children: [
-                  IconButton(
-                    onPressed:() => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.arrow_circle_left_outlined,color: ColorsConstants.brow,size:35,),
+                  Offstage(
+                    offstage: !showFilter,
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(
+                        Icons.arrow_circle_left_outlined,
+                        color: ColorsConstants.brow,
+                        size: 35,
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     width: 16,
