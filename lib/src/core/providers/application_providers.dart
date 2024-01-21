@@ -12,8 +12,6 @@ import 'package:expede/src/repositories/device/device_repository.dart';
 import 'package:expede/src/repositories/device/device_repository_impl.dart';
 import 'package:expede/src/repositories/items_shipment/items_shipment_repository.dart';
 import 'package:expede/src/repositories/items_shipment/items_shipment_repository_impl.dart';
-import 'package:expede/src/repositories/schedule/schedule_repository.dart';
-import 'package:expede/src/repositories/schedule/schedule_repository_impl.dart';
 import 'package:expede/src/repositories/shipment/shipment_repository.dart';
 import 'package:expede/src/repositories/shipment/shipment_repository_impl.dart';
 import 'package:expede/src/repositories/user/user_repository.dart';
@@ -88,8 +86,9 @@ Future<void> logout(LogoutRef ref) async {
   final sp = await SharedPreferences.getInstance();
   sp.clear();
 
-  ref.invalidate(getMeProvider);
-  ref.invalidate(getMyCompanyProvider);
+  // ref.invalidate(getMyCompanyProvider);
+  // ref.invalidate(getMeProvider);
+
 
   Navigator.of(AppNavGlobalKey.instance.navKey.currentContext!)
       .pushNamedAndRemoveUntil(
@@ -98,6 +97,3 @@ Future<void> logout(LogoutRef ref) async {
   );
 }
 
-@riverpod
-ScheduleRepository scheduleRepository(ScheduleRepositoryRef ref) =>
-    ScheduleRepositoryImpl(restClient: ref.read(restClientProvider));

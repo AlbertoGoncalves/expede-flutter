@@ -13,8 +13,8 @@ class ShipmentRegisterVm extends _$ShipmentRegisterVm {
   ShipmentRegisterState build() => ShipmentRegisterState.initial();
 
   Future<void> register(
-      {
-      DateTime? date,
+      {DateTime? sendDate,
+      DateTime? arrivalDate,
       int? hour,
       String? driver,
       String? modalType,
@@ -23,20 +23,20 @@ class ShipmentRegisterVm extends _$ShipmentRegisterVm {
 
     final CompanyModel(:id) = await ref.watch(getMyCompanyProvider.future);
 
-    final UserModel(id:idUser) = await ref.watch(getMeProvider.future);
-    
+    final UserModel(id: idUser) = await ref.watch(getMeProvider.future);
+
     final dto = (
       companyId: id,
       userId: idUser,
-      date: date!,
+      sendDate: sendDate!,
+      arrivalDate: arrivalDate!,
       hour: hour!,
       driver: driver!,
       modalType: modalType!,
       transport: transport!
     );
 
-    final resulRegister =
-        await shipmentRepository.registerShipment(dto);
+    final resulRegister = await shipmentRepository.registerShipment(dto);
 
     switch (resulRegister) {
       case Success():
@@ -46,32 +46,34 @@ class ShipmentRegisterVm extends _$ShipmentRegisterVm {
     }
   }
 
-    Future<void> alter(
+  Future<void> alter(
       {int? id,
-      DateTime? date,
+      DateTime? sendDate,
+      DateTime? arrivalDate,
       int? hour,
       String? driver,
       String? modalType,
       String? transport}) async {
     final shipmentRepository = ref.watch(shipmentRepositoryProvider);
 
-    final CompanyModel(id:companyId) = await ref.watch(getMyCompanyProvider.future);
+    final CompanyModel(id: companyId) =
+        await ref.watch(getMyCompanyProvider.future);
 
-    final UserModel(id:idUser) = await ref.watch(getMeProvider.future);
-    
+    final UserModel(id: idUser) = await ref.watch(getMeProvider.future);
+
     final dto = (
       id: id!,
       companyId: companyId,
       userId: idUser,
-      date: date!,
+      sendDate: sendDate!,
+      arrivalDate: arrivalDate!,
       hour: hour!,
       driver: driver!,
       modalType: modalType!,
       transport: transport!
     );
 
-    final resulRegister =
-        await shipmentRepository.alterShipment(dto);
+    final resulRegister = await shipmentRepository.alterShipment(dto);
 
     switch (resulRegister) {
       case Success():
@@ -81,13 +83,14 @@ class ShipmentRegisterVm extends _$ShipmentRegisterVm {
     }
   }
 
-    Future<void> delete({int? id,}) async {
+  Future<void> delete({
+    int? id,
+  }) async {
     final shipmentRepository = ref.watch(shipmentRepositoryProvider);
-    
+
     final dto = (id: id!);
 
-    final resulRegister =
-        await shipmentRepository.deleteShipment(dto);
+    final resulRegister = await shipmentRepository.deleteShipment(dto);
 
     switch (resulRegister) {
       case Success():

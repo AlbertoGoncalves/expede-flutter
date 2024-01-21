@@ -5,7 +5,6 @@ import 'package:expede/src/core/ui/helpers/messages.dart';
 import 'package:expede/src/core/ui/widgets/avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:validatorless/validatorless.dart';
 
 class DevicePage extends ConsumerStatefulWidget {
   const DevicePage({super.key});

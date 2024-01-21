@@ -3,11 +3,13 @@ sealed class UserModel {
   final String name;
   final String email;
   final String? avatar;
+  final String? password;
 
   UserModel({
     required this.id,
     required this.name,
     required this.email,
+    this.password,
     this.avatar,
   });
 
@@ -28,6 +30,7 @@ class UserModelADM extends UserModel {
     required super.id,
     required super.name,
     required super.email,
+    super.password,
     super.avatar,
     this.workDays,
     this.workHours,
@@ -62,6 +65,7 @@ class UserModelEmployee extends UserModel {
     required super.id,
     required super.name,
     required super.email,
+    super.password,
     required this.companyId,
     required this.workDays,
     required this.workHours,

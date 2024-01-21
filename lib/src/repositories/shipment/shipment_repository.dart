@@ -11,8 +11,9 @@ abstract interface class ShipmentRepository {
       ({
         int companyId,
         int userId,
-        DateTime date,
-        int hour,
+        DateTime sendDate,
+        DateTime arrivalDate,
+        int? hour,
         String driver,
         String modalType,
         String transport
@@ -23,12 +24,22 @@ abstract interface class ShipmentRepository {
         int id,
         int companyId,
         int userId,
-        DateTime? date,
+        DateTime sendDate,
+        DateTime arrivalDate,
         int? hour,
         String driver,
         String modalType,
         String transport
       }) itemShipmentModel);
 
-  Future<Either<RepositoryException, Nil>> deleteShipment(({int id}) itemShipmentModel);
+  Future<Either<RepositoryException, Nil>> deleteShipment(
+      ({int id}) itemShipmentModel);
+
+  Future<Either<RepositoryException, List<ShipmentModel>>> findScheduleByDate(
+      ({
+        int? id,
+        int companyId,
+        DateTime date,
+        int? userId,
+      }) filter);
 }

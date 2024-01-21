@@ -37,65 +37,56 @@ class HomeFeaturesSystem extends StatelessWidget {
             ),
           ],
         ),
-        InkWell(
-          onTap: () async {
-            await Navigator.of(context).pushNamed('/employee/register');
-            // ref.invalidate(getMeProvider);
-            // ref.invalidate(homeAdmVmProvider);
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () async {
-                  await Navigator.of(context)
-                      .pushNamed('/home/browser/shipments');
-                  // ref.invalidate(getMeProvider);
-                  // ref.invalidate(homeAdmVmProvider);
-                },
-                child: const Feature(
-                  name: 'Carregamento',
-                  image: ImageConstants.shipments,
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () async {
+                await Navigator.of(context)
+                    .pushNamed('/home/browser/shipments');
+                // ref.invalidate(getMeProvider);
+                // ref.invalidate(homeAdmVmProvider);
+              },
+              child: const Feature(
+                name: 'Carregamento',
+                image: ImageConstants.shipments,
               ),
-              InkWell(
-                onTap: () async {
-                  await Navigator.of(context)
-                      .pushNamed('/home/browser/items_shipment');
-                  // ref.invalidate(getMeProvider);
-                  // ref.invalidate(homeAdmVmProvider);
-                },
-                child: const Feature(
-                  name: 'Cargas',
-                  image: ImageConstants.boxBoarding,
-                ),
+            ),
+            InkWell(
+              onTap: () async {
+                await Navigator.of(context)
+                    .pushNamed('/home/browser/items_shipment');
+                // ref.invalidate(getMeProvider);
+                // ref.invalidate(homeAdmVmProvider);
+              },
+              child: const Feature(
+                name: 'Cargas',
+                image: ImageConstants.boxBoarding,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        InkWell(
-          onTap: () async {
-            await Navigator.of(context).pushNamed('/employee/register');
-            // ref.invalidate(getMeProvider);
-            // ref.invalidate(homeAdmVmProvider);
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () async {
-                  await Navigator.of(context)
-                      .pushNamed('/mqtt/conected');
-                  // ref.invalidate(getMeProvider);
-                  // ref.invalidate(homeAdmVmProvider);
-                },
-                child: const Feature(
-                  name: 'Mqtt',
-                  image: ImageConstants.shipments,
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () async {
+                await Navigator.of(context).pushNamed('/shipments/timeline');
+                // ref.invalidate(getMeProvider);
+                // ref.invalidate(homeAdmVmProvider);
+              },
+              child: const Feature(
+                name: 'Cronograma',
+                image: ImageConstants.tracking,
               ),
-            ],
-          ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(10),
+              width: 160,
+              height: 110,
+            ),
+          ],
         ),
       ],
     );

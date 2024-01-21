@@ -1,25 +1,26 @@
 import 'dart:developer';
 import 'package:expede/src/core/ui/constants.dart';
 import 'package:expede/src/core/ui/widgets/app_loader.dart';
-import 'package:expede/src/features/employee/schedule/appointment_ds.dart';
-import 'package:expede/src/features/employee/schedule/employee_schedule_vm.dart';
-import 'package:expede/src/model/user_model.dart';
+import 'package:expede/src/features/shipment/schedule/appointment_ds.dart';
+import 'package:expede/src/features/shipment/schedule/shipments_schedule_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class EmployeeSchedulePage extends ConsumerStatefulWidget {
-  const EmployeeSchedulePage({super.key});
+class ShipmentsSchedulePage extends ConsumerStatefulWidget {
+  const ShipmentsSchedulePage({super.key});
 
   @override
-  ConsumerState<EmployeeSchedulePage> createState() =>
-      _EmployeeSchedulePageState();
+  ConsumerState<ShipmentsSchedulePage> createState() =>
+      _ShipmentsSchedulePageState();
 }
 
-class _EmployeeSchedulePageState extends ConsumerState<EmployeeSchedulePage> {
+class _ShipmentsSchedulePageState extends ConsumerState<ShipmentsSchedulePage> {
   late DateTime dateSelected;
+  DateTime dateSelected1 = DateTime.now();
   var ignoreFistLoad = true;
+  var companyId = 3;
 
   @override
   void initState() {
@@ -30,11 +31,11 @@ class _EmployeeSchedulePageState extends ConsumerState<EmployeeSchedulePage> {
 
   @override
   Widget build(BuildContext context) {
-    final UserModel(id: userId, :name) =
-        ModalRoute.of(context)!.settings.arguments as UserModel;
+    // final UserModel(id: userId, :name) =
+    //     ModalRoute.of(context)!.settings.arguments as UserModel;
 
     final scheduleAsync =
-        ref.watch(employeeScheduleVmProvider(userId, dateSelected));
+        ref.watch(shipmentsScheduleVmProvider(0, companyId, dateSelected, 0));
 
     return Scaffold(
       appBar: AppBar(
@@ -42,9 +43,9 @@ class _EmployeeSchedulePageState extends ConsumerState<EmployeeSchedulePage> {
       ),
       body: Column(
         children: [
-          Text(
-            name,
-            style: const TextStyle(
+          const Text(
+            "name",
+            style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w500,
             ),
@@ -72,17 +73,18 @@ class _EmployeeSchedulePageState extends ConsumerState<EmployeeSchedulePage> {
                   todayHighlightColor: ColorsConstants.brow,
                   showDatePickerButton: true,
                   showTodayButton: true,
-                  dataSource: AppointmentDs(schedules: schedules),
+                  dataSource: AppointmentDs(schedules: schedules, dateSelected: dateSelected1),
                   onViewChanged: (viewChangedDetails) {
                     if (ignoreFistLoad) {
                       ignoreFistLoad = false;
                       return;
                     }
                     ref
-                        .read(employeeScheduleVmProvider(userId, dateSelected)
+                        .read(shipmentsScheduleVmProvider(0, companyId, dateSelected, 0)
                             .notifier)
                         .changeDate(
-                            userId, viewChangedDetails.visibleDates.first);
+                            0, companyId, viewChangedDetails.visibleDates.first, 0);
+                            dateSelected1 = viewChangedDetails.visibleDates.first;
                   },
                   onTap: (calendarTapDetails) {
                     if (calendarTapDetails.appointments != null &&
@@ -109,23 +111,6 @@ class _EmployeeSchedulePageState extends ConsumerState<EmployeeSchedulePage> {
                       );
                     }
                   },
-                  // appointmentBuilder: (context, calendarAppointmentDetails) {
-                  //   return Container(
-                  //     decoration: BoxDecoration(
-                  //         color: ColorsConstants.brow,
-                  //         shape: BoxShape.rectangle,
-                  //         borderRadius: BorderRadius.circular(5)),
-                  //     child: Center(
-                  //       child: Text(
-                  //         calendarAppointmentDetails.appointments.first.subject,
-                  //         style: const TextStyle(
-                  //           color: Colors.white,
-                  //           fontSize: 12,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   );
-                  // },
                 ),
               );
             },

@@ -1,8 +1,9 @@
+import 'package:asyncstate/asyncstate.dart';
 import 'package:expede/src/core/providers/application_providers.dart';
 import 'package:expede/src/core/ui/app_icons.dart';
 import 'package:expede/src/core/ui/constants.dart';
 import 'package:expede/src/core/ui/widgets/app_loader.dart';
-import 'package:expede/src/features/home/adm/home_adm_vm.dart';
+import 'package:expede/src/features/customers/browser_customers/browser_customers_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -73,19 +74,9 @@ class HomeHeader extends ConsumerWidget {
                   const SizedBox(
                     width: 16,
                   ),
-                  // const Expanded(
-                  //   child: Text(
-                  //     'editar',
-                  //     style: TextStyle(
-                  //       color: ColorsConstants.brow,
-                  //       fontSize: 12,
-                  //       fontWeight: FontWeight.w500,
-                  //     ),
-                  //   ),
-                  // ),
                   IconButton(
                     onPressed: () {
-                      ref.read(homeAdmVmProvider.notifier).logout();
+                      ref.read(logoutProvider.future).asyncLoader();
                     },
                     icon: const Icon(
                       AppIcons.exit,
@@ -105,22 +96,11 @@ class HomeHeader extends ConsumerWidget {
           const SizedBox(
             height: 24,
           ),
-          // const Text(
-          //   'Bem Vindo',
-          //   style: TextStyle(
-          //     color: Colors.white,
-          //     fontSize: 18,
-          //     fontWeight: FontWeight.w500,
-          //   ),
-          // ),
-          // const SizedBox(
-          //   height: 24,
-          // ),
           Text(
             textHeader,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 40,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
           ),

@@ -17,6 +17,11 @@ sealed class ImageConstants {
   static const planes = 'assets/images/planes.png';
   static const train = 'assets/images/train.png';
   static const ship = 'assets/images/ship.png';
+  static const tracking = 'assets/images/global-distribution.png';
+  static const drone = 'assets/images/drone-delivery.png';
+  static const packageArrival = 'assets/images/package-arrival.png';
+  static const packageSend = 'assets/images/package-send.png';
+  static const packageCheck = 'assets/images/package-check.png';
 
 }
 

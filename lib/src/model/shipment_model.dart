@@ -2,7 +2,8 @@ class ShipmentModel {
   final int id;
   final int companyId;
   final int userId;
-  final DateTime date;
+  final DateTime sendDate;
+  final DateTime arrivalDate;
   final int hour;
   final String driver;
   final String modalType;
@@ -13,7 +14,8 @@ class ShipmentModel {
     required this.id,
     required this.companyId,
     required this.userId,
-    required this.date,
+    required this.sendDate,
+    required this.arrivalDate,
     required this.hour,
     required this.driver,
     required this.modalType,
@@ -26,7 +28,8 @@ class ShipmentModel {
         'id': final int id,
         'company_id': final int companyId,
         'user_id': final int userId,
-        'date': final String date,
+        'send_date': final String sendDate,
+        'arrival_date': final String arrivalDate,
         'time': final int hour,
         'driver': final String driver,
         'modal_type': final String modalType,
@@ -36,7 +39,8 @@ class ShipmentModel {
           id: id,
           companyId: companyId,
           userId: userId,
-          date: DateTime.parse(date),
+          sendDate: DateTime.parse(sendDate),
+          arrivalDate: DateTime.parse(arrivalDate),
           hour: hour,
           driver: driver,
           modalType: modalType,

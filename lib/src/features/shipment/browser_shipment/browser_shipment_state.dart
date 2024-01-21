@@ -10,7 +10,7 @@ class BrowserShipmentState {
 
   BrowserShipmentState copyWith({
     BrowserShipmentStateStatus? status,
-    List<ShipmentModel>? itemsShipment,
+    List<ShipmentModel>? shipment,
   }) {
     return BrowserShipmentState(
         status: status ?? this.status, shipment: shipment ?? this.shipment);

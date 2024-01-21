@@ -22,6 +22,7 @@ class UserRepositoryImpl implements UserRepository {
       final Response(:data) = await restClient.unAuth.post('/auth', data: {
         "email": email,
         "password": password,
+        
       });
       return Success(data['access_token']);
     } on DioException catch (e, s) {
@@ -136,8 +137,7 @@ class UserRepositoryImpl implements UserRepository {
         List<String> workDays,
         List<int> workHours,
       }) userModel) async {
-            try {
-      
+    try {
       await restClient.auth.post('/users/', data: {
         'name': userModel.name,
         'email': userModel.email,
@@ -155,5 +155,53 @@ class UserRepositoryImpl implements UserRepository {
       return Failure(RepositoryException(
           message: 'Erro ao inserir administrador como colaborador'));
     }
-      }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> alterUser(
+      ({
+        int id,
+        String name,
+        String email,
+        String password,
+        List<String> workDays,
+        List<int> workHours,
+      }) userModel) async {
+    try {
+      await restClient.auth.patch('/users/${userModel.id}', data: {
+        'id': userModel.id,
+        'name': userModel.name,
+        'email': userModel.email,
+        'password': userModel.password,
+        'work_days': userModel.workDays,
+        'work_hours': userModel.workHours,
+      });
+
+      return Success(nil);
+    } on DioException catch (e, s) {
+      log('Erro ao alterar usuario',
+          error: e, stackTrace: s);
+      return Failure(RepositoryException(
+          message: 'Erro ao alterar usuario'));
+    }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> deleteEmployee(
+      ({
+        int id,
+      }) userModel) async {
+    try {
+      await restClient.auth.delete('/users/${userModel.id}', data: {
+        'id': userModel.id,
+      });
+
+      return Success(nil);
+    } on DioException catch (e, s) {
+      log('Erro ao delete um usuario',
+          error: e, stackTrace: s);
+      return Failure(RepositoryException(
+          message: 'Erro ao delete um usuario'));
+    }
+  }
 }

@@ -3,10 +3,10 @@ import 'package:expede/src/core/providers/application_providers.dart';
 import 'package:expede/src/core/ui/app_icons.dart';
 import 'package:expede/src/core/ui/constants.dart';
 import 'package:expede/src/core/ui/widgets/app_loader.dart';
+import 'package:expede/src/core/ui/widgets/home_header.dart';
 import 'package:expede/src/features/customers/browser_customers/browser_customers_state.dart';
 import 'package:expede/src/features/customers/browser_customers/browser_customers_vm.dart';
 import 'package:expede/src/features/customers/browser_customers/widgets/home_customers_tile.dart';
-import 'package:expede/src/features/home/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -48,7 +48,7 @@ dependencies:
   html: ^0.15.4
   table_calendar: ^3.0.9
   intl: ^0.18.1
-  syncfusion_flutter_calendar: ^23.1.42
+  syncfusion_flutter_calendar: ^23.2.6
   mqtt_client: ^10.0.0
 
 dev_dependencies:

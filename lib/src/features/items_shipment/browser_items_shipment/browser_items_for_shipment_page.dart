@@ -3,7 +3,7 @@ import 'package:expede/src/core/providers/application_providers.dart';
 import 'package:expede/src/core/ui/app_icons.dart';
 import 'package:expede/src/core/ui/constants.dart';
 import 'package:expede/src/core/ui/widgets/app_loader.dart';
-import 'package:expede/src/features/home/widgets/home_header.dart';
+import 'package:expede/src/core/ui/widgets/home_header.dart';
 import 'package:expede/src/features/items_shipment/browser_items_shipment/browser_items_shipment_vm.dart';
 import 'package:expede/src/features/items_shipment/browser_items_shipment/items_for_shipment_provider.dart';
 import 'package:expede/src/features/items_shipment/browser_items_shipment/widgets/home_tems_shipment_tile.dart';
@@ -17,7 +17,7 @@ class BrowserItemsForShipmentPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final shipment =  ModalRoute.of(context)!.settings.arguments as ShipmentModel;
+    final shipment = ModalRoute.of(context)!.settings.arguments as ShipmentModel;
     
     final browserItemsShipmentState = ref.watch(getItemsForShipmentProvider(shipment.id));   
        
@@ -44,7 +44,7 @@ class BrowserItemsForShipmentPage extends ConsumerWidget {
           return CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: HomeHeader.withoutFilter(
+                child: HomeHeader(
                   textHeader: 'Itens do Carregamento Cod. ${shipment.id}',
                 ),
               ),

@@ -19,6 +19,6 @@ class ItemsRegisterState {
     return ItemsRegisterState(
         status: status ?? this.status,
         customers: customers ?? this.customers,
-        shipment: shipment ?? this.shipment);
+        shipment: shipment ?? shipment);
   }
 }

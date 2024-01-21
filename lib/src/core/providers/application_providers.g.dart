@@ -172,7 +172,7 @@ final getMyCompanyProvider = FutureProvider<CompanyModel>.internal(
 );
 
 typedef GetMyCompanyRef = FutureProviderRef<CompanyModel>;
-String _$logoutHash() => r'07dc3ad867b424d09f17f5c0b89819929583a547';
+String _$logoutHash() => r'621fd7df4ad20c4727471a25a8da820fba0a7d5a';
 
 /// See also [logout].
 @ProviderFor(logout)
@@ -186,22 +186,5 @@ final logoutProvider = AutoDisposeFutureProvider<void>.internal(
 );
 
 typedef LogoutRef = AutoDisposeFutureProviderRef<void>;
-String _$scheduleRepositoryHash() =>
-    r'd8bb90e09ddffd4926259e9e2ec796a76739a37d';
-
-/// See also [scheduleRepository].
-@ProviderFor(scheduleRepository)
-final scheduleRepositoryProvider =
-    AutoDisposeProvider<ScheduleRepository>.internal(
-  scheduleRepository,
-  name: r'scheduleRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$scheduleRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef ScheduleRepositoryRef = AutoDisposeProviderRef<ScheduleRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

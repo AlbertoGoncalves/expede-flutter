@@ -21,8 +21,7 @@ abstract interface class UserRepository {
         List<int> workHours,
       }) userModel);
 
-
-    Future<Either<RepositoryException, Nil>> registerEmployee(
+  Future<Either<RepositoryException, Nil>> registerEmployee(
       ({
         int companyId,
         String name,
@@ -30,5 +29,20 @@ abstract interface class UserRepository {
         String password,
         List<String> workDays,
         List<int> workHours,
+      }) userModel);
+
+  Future<Either<RepositoryException, Nil>> alterUser(
+      ({
+        int id,
+        String name,
+        String email,
+        String password,
+        List<String> workDays,
+        List<int> workHours,
+      }) userModel);
+
+  Future<Either<RepositoryException, Nil>> deleteEmployee(
+      ({
+        int id,
       }) userModel);
 }

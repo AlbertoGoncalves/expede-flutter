@@ -40,7 +40,7 @@ class _CompanyRegisterPageState
           break;
         case CompanyRegisterStateStatus.success:
           Navigator.of(context)
-              .pushNamedAndRemoveUntil('/home/adm', (route) => false);
+              .pushNamedAndRemoveUntil('/home', (route) => false);
         case CompanyRegisterStateStatus.error:
           Messages.showError(
               'Desculpe ocorreu um errro ao registrar barbearia', context);

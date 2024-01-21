@@ -3,8 +3,8 @@ import 'package:expede/src/core/ui/constants.dart';
 import 'package:expede/src/core/ui/helpers/form_helper.dart';
 import 'package:expede/src/core/ui/helpers/messages.dart';
 import 'package:expede/src/core/ui/widgets/avatar_widget.dart';
-import 'package:expede/src/features/schedule/widgets/schedule_calendar.dart';
 import 'package:expede/src/features/shipment/browser_shipment/browser_shipment_vm.dart';
+import 'package:expede/src/core/ui/widgets/schedule_calendar.dart';
 import 'package:expede/src/features/shipment/register/shipment_register_state.dart';
 import 'package:expede/src/features/shipment/register/shipment_register_vm.dart';
 import 'package:expede/src/model/shipment_model.dart';
@@ -23,15 +23,18 @@ class ShipmentRegisterPage extends ConsumerStatefulWidget {
 
 class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
   var dateFormat = DateFormat('dd/MM/yyyy');
-  var dateTimeSelect = DateTime.now();
-  var showCalendar = false;
+  var sendDateSelect = DateTime.now();
+  var arrivalDateSelect = DateTime.now();
+  var showCalendarSend = false;
+  var showCalendarArrival = false;
   var registerOrAlter = true;
   int shipmentId = 0;
 
   final formKey = GlobalKey<FormState>();
   final driverEC = TextEditingController();
   final transportEC = TextEditingController();
-  final dateEC = TextEditingController();
+  final sendDateEC = TextEditingController();
+  final arrivalDateEC = TextEditingController();
 
   final dropValueModalType = ValueNotifier('');
   final dropOptionsModalType = ShipmentsTypeOptions.modalTypeOptions;
@@ -40,7 +43,8 @@ class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
   void dispose() {
     driverEC.dispose();
     transportEC.dispose();
-    dateEC.dispose();
+    sendDateEC.dispose();
+    arrivalDateEC.dispose();
     super.dispose();
   }
 
@@ -53,9 +57,12 @@ class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
       transportEC.text.isEmpty
           ? transportEC.text = shipment.transport
           : transportEC.text;
-      dateEC.text.isEmpty
-          ? dateEC.text = dateFormat.format(shipment.date)
-          : dateEC.text;
+      sendDateEC.text.isEmpty
+          ? sendDateEC.text = dateFormat.format(shipment.sendDate)
+          : sendDateEC.text;
+      arrivalDateEC.text.isEmpty
+          ? arrivalDateEC.text = dateFormat.format(shipment.arrivalDate)
+          : arrivalDateEC.text;
       dropValueModalType.value.isEmpty
           ? dropValueModalType.value = shipment.modalType.toString()
           : dropValueModalType.value;
@@ -174,12 +181,15 @@ class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
                         height: 24,
                       ),
                       TextFormField(
-                        controller: dateEC,
-                        validator: Validatorless.required('Data obrigatoria'),
+                        controller: sendDateEC,
+                        showCursor: false,
+                        readOnly: true,
+                        validator:
+                            Validatorless.required('Data de envio obrigatoria'),
                         onTapOutside: (_) => context.unfocus(),
                         onTap: () {
                           setState(() {
-                            showCalendar = true;
+                            showCalendarSend = true;
                           });
                         },
                         decoration: const InputDecoration(
@@ -187,7 +197,7 @@ class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
                         ),
                       ),
                       Offstage(
-                        offstage: !showCalendar,
+                        offstage: !showCalendarSend,
                         child: Column(
                           children: [
                             const SizedBox(
@@ -196,17 +206,75 @@ class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
                             ScheduleCalendar(
                               cancelPressed: () {
                                 setState(() {
-                                  showCalendar = false;
+                                  showCalendarSend = false;
                                 });
                               },
                               okPressed: (DateTime value) {
                                 setState(() {
-                                  dateEC.text = dateFormat.format(value);
-                                  dateTimeSelect = value;
-                                  showCalendar = false;
+                                  sendDateEC.text = dateFormat.format(value);
+                                  sendDateSelect = value;
+                                  showCalendarSend = false;
                                 });
                               },
-                              workDays: const [],
+                              workDays: const [
+                                'seg',
+                                'ter',
+                                'qua',
+                                'qui',
+                                'sex',
+                                'sab'
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      TextFormField(
+                        controller: arrivalDateEC,
+                        showCursor: false,
+                        readOnly: true,
+                        validator: Validatorless.required(
+                            'Data de chegada obrigatoria'),
+                        onTapOutside: (_) => context.unfocus(),
+                        onTap: () {
+                          setState(() {
+                            showCalendarArrival = true;
+                          });
+                        },
+                        decoration: const InputDecoration(
+                          label: Text('Data de chegada'),
+                        ),
+                      ),
+                      Offstage(
+                        offstage: !showCalendarArrival,
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            ScheduleCalendar(
+                              cancelPressed: () {
+                                setState(() {
+                                  showCalendarArrival = false;
+                                });
+                              },
+                              okPressed: (DateTime value) {
+                                setState(() {
+                                  arrivalDateEC.text = dateFormat.format(value);
+                                  arrivalDateSelect = value;
+                                  showCalendarArrival = false;
+                                });
+                              },
+                              workDays: const [
+                                'seg',
+                                'ter',
+                                'qua',
+                                'qui',
+                                'sex',
+                                'sab'
+                              ],
                             ),
                           ],
                         ),
@@ -236,7 +304,8 @@ class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
                                 modalType: modalType,
                                 driver: driver,
                                 transport: transport,
-                                date: dateTimeSelect,
+                                sendDate: sendDateSelect,
+                                arrivalDate: arrivalDateSelect,
                                 hour: 1);
                           } else {
                             shipmentRegisterVM.alter(
@@ -244,13 +313,16 @@ class _ShipmentRegisterPageState extends ConsumerState<ShipmentRegisterPage> {
                                 modalType: modalType,
                                 driver: driver,
                                 transport: transport,
-                                date: dateTimeSelect,
+                                sendDate: sendDateSelect,
+                                arrivalDate: arrivalDateSelect,
                                 hour: 1);
                           }
                       }
                     },
                     child: Text(
-                      registerOrAlter ? 'Cadastrar Carregamento': 'Alterar Carregamento',
+                      registerOrAlter
+                          ? 'Cadastrar Carregamento'
+                          : 'Alterar Carregamento',
                     ),
                   ),
                   const SizedBox(

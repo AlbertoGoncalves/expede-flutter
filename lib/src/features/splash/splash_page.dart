@@ -37,12 +37,16 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   void _redirect(String routName) {
     if (!endAnimation) {
       redirectTimer?.cancel();
-      redirectTimer = Timer(const Duration(milliseconds: 300), () { 
+      redirectTimer = Timer(const Duration(milliseconds: 300), () {
         _redirect(routName);
       });
     } else {
       redirectTimer?.cancel();
-      Navigator.of(context).pushNamedAndRemoveUntil(routName, (route) => false);
+
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        routName,
+        (route) => false,
+      );
     }
   }
 
@@ -58,13 +62,12 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         data: (data) {
           switch (data) {
             case SplashState.loggedADM:
-              // Navigator.of(context).pushNamedAndRemoveUntil('/home/adm', (route) => false);
-              _redirect('/home/adm');
+              _redirect('/home');
             case SplashState.loggedEmployee:
-              // Navigator.of(context).pushNamedAndRemoveUntil('/home/employee', (route) => false);
-              _redirect('/home/employee');
+              _redirect('/home');
+            case SplashState.login:
+              _redirect('/auth/login');
             case _:
-              // Navigator.of(context).pushNamedAndRemoveUntil('/auth/login', (route) => false);
               _redirect('/auth/login');
           }
         },

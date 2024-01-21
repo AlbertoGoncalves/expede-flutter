@@ -1,4 +1,3 @@
-
 import 'package:asyncstate/asyncstate.dart';
 import 'package:expede/src/core/exceptions/repository_exception.dart';
 import 'package:expede/src/core/fp/either.dart';
@@ -73,6 +72,76 @@ class EmployeeRegisterVm extends _$EmployeeRegisterVm {
       );
 
       resulRegister = await registerEmployee(dto);
+    }
+
+    switch (resulRegister) {
+      case Success():
+        state = state.copyWith(status: EmployeeRegisterStateStatus.success);
+      case Failure():
+        state = state.copyWith(status: EmployeeRegisterStateStatus.error);
+    }
+    asyncLoaderHandler.close();
+  }
+
+  Future<void> alter({int? id,String? name, String? email, String? password}) async {
+    final EmployeeRegisterState(:registerADM, :workDays, :workHours) = state;
+    final asyncLoaderHandler = AsyncLoaderHandler()..start();
+
+    final UserRepository(:alterUser) =
+        ref.read(userRepositoryProvider);
+
+    final Either<RepositoryException, Nil> resulRegister;
+
+    if (registerADM) {
+      final dto = (
+        id: id!,
+        name: name!,
+        email: email!,
+        password: password!,
+        workDays: workDays,
+        workHours: workHours
+      );
+      resulRegister = await alterUser(dto);
+    } else {
+      final dto = (
+        id: id!,
+        name: name!,
+        email: email!,
+        password: password!,
+        workDays: workDays,
+        workHours: workHours
+      );
+      resulRegister = await alterUser(dto);
+    }
+    switch (resulRegister) {
+      case Success():
+        state = state.copyWith(status: EmployeeRegisterStateStatus.success);
+      case Failure():
+        state = state.copyWith(status: EmployeeRegisterStateStatus.error);
+    }
+    asyncLoaderHandler.close();
+  }
+
+  Future<void> delete({int? id}) async {
+    final EmployeeRegisterState(:registerADM, :workDays, :workHours) = state;
+    final asyncLoaderHandler = AsyncLoaderHandler()..start();
+
+    final UserRepository(:deleteEmployee,) =
+        ref.read(userRepositoryProvider);
+
+    final Either<RepositoryException, Nil> resulRegister;
+
+    if (registerADM) {
+      final dto = (
+        id: id!,
+      );
+      resulRegister = await deleteEmployee(dto);
+    } else {
+
+      final dto = (
+        id: id!,
+      );
+      resulRegister = await deleteEmployee(dto);
     }
 
     switch (resulRegister) {

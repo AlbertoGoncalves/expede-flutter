@@ -10,7 +10,7 @@ import 'package:expede/src/features/items_shipment/register/item_shipment_regist
 import 'package:expede/src/features/items_shipment/register/item_shipment_register_vm.dart';
 import 'package:expede/src/features/items_shipment/register/items_register_state.dart';
 import 'package:expede/src/features/items_shipment/register/items_register_vm.dart';
-import 'package:expede/src/features/schedule/widgets/schedule_calendar.dart';
+import 'package:expede/src/core/ui/widgets/schedule_calendar.dart';
 import 'package:expede/src/model/item_shipment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -178,6 +178,8 @@ class _ItemShipmentRegisterPageState
                       ),
                       TextFormField(
                         controller: dateEC,
+                        showCursor: false,
+                        readOnly: true,
                         validator: Validatorless.required('Data obrigatoria'),
                         onTapOutside: (_) => context.unfocus(),
                         onTap: () {
@@ -209,7 +211,7 @@ class _ItemShipmentRegisterPageState
                                   showCalendar = false;
                                 });
                               },
-                              workDays: const [],
+                              workDays: const ['seg','ter','qua','qui','sex','sab'],
                             ),
                           ],
                         ),

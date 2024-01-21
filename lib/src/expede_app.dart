@@ -10,15 +10,14 @@ import 'package:expede/src/features/customers/browser_customers/browser_customer
 import 'package:expede/src/features/customers/register/customer_register_page.dart';
 import 'package:expede/src/features/employee/browser_employees/browser_employees_page.dart';
 import 'package:expede/src/features/employee/register/employee_register_page.dart';
-import 'package:expede/src/features/employee/schedule/employee_schedule_page.dart';
-import 'package:expede/src/features/home/adm/home_adm_page.dart';
-import 'package:expede/src/features/home/employee/home_employee_page.dart';
+import 'package:expede/src/features/home/home_page.dart';
 import 'package:expede/src/features/items_shipment/browser_items_shipment/browser_items_for_shipment_page.dart';
 import 'package:expede/src/features/items_shipment/browser_items_shipment/browser_items_shipment_page.dart';
 import 'package:expede/src/features/items_shipment/register/item_shipment_register_page.dart';
-import 'package:expede/src/features/schedule/schedule_page.dart';
 import 'package:expede/src/features/shipment/browser_shipment/browser_shipment_page.dart';
 import 'package:expede/src/features/shipment/register/shipment_register_page.dart';
+import 'package:expede/src/features/shipment/schedule/shipments_schedule_page.dart';
+import 'package:expede/src/features/shipment/timeline/timeline_shipment_page.dart';
 import 'package:expede/src/features/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,7 +31,7 @@ class ExpedeApp extends StatelessWidget {
       customLoader: const AppLoader(),
       builder: (asyncNavigatorObserver) {
         return MaterialApp(
-          title: 'DW Barbershoip',
+          title: 'EXPEDE',
           theme: AppTheme.themeData,
           navigatorObservers: [asyncNavigatorObserver],
           navigatorKey: AppNavGlobalKey.instance.navKey,
@@ -41,22 +40,19 @@ class ExpedeApp extends StatelessWidget {
             '/auth/login': (_) => const LoginPage(),
             '/auth/register/user': (_) => const UserRegisterPage(),
             '/auth/register/company': (_) => const CompanyRegisterPage(),
-            '/home/adm': (_) => const HomeAdmPage(),
+            '/home': (_) => const HomePage(),
             '/home/browser/employees': (_) => const BrowserEmployeesPage(),
             '/employee/register': (_) => const EmployeeRegisterPage(),
             '/home/browser/customers': (_) => const BrowserCustomersPage(),
             '/customer/register': (_) => const CustomerRegisterPage(),
-
             '/mqtt/conected': (_) => const DevicePage(),
-            
             '/home/browser/shipments': (_) => const BrowserShipmentPage(),
             '/home/browser/items_for_shipment': (_) => const BrowserItemsForShipmentPage(),
             '/shipment/register': (_) => const ShipmentRegisterPage(),
-
             '/home/browser/items_shipment': (_) => const BrowserItemsShipmentPage(),
             '/item_shipment/register': (_) => const ItemShipmentRegisterPage(),
-            
-            '/home/employee': (_) => const HomeEmployeePage(),
+            '/shipments/schedule': (_) => const ShipmentsSchedulePage(),
+            '/shipments/timeline': (_) => const TimelineShipmentPage(),
           },
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
