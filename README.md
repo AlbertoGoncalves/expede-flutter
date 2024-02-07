@@ -5,7 +5,7 @@
 ## Objetivo
 
 Criar um app capaz de suportar o processo de envio de mercadorias, sendo possível realizar os cadastros de empresa, usuário, 
-cliente, carregamento e item do carregamento bem como painel à vista para controle de envio, chegada e carregamentos em atraso.mentos em atraso. 
+cliente, carregamento e item do carregamento bem como painel à vista para controle de envio, chegada e carregamentos em atraso. 
 
 ## Histórico de lançamentos
 
@@ -20,8 +20,9 @@ cliente, carregamento e item do carregamento bem como painel à vista para contr
     * Conclusão app expede todas as funções operacionais. 
     
 ## Preview
-https://user-images.githubusercontent.com/91420997/222294515-cdf30bae-66c1-4f94-8623-ead0d8d5b55b.mp4
 
+[![Watch the video](https://img.youtube.com/vi/1NJoW17UQhU/maxresdefault.jpg)](https://www.youtube.com/watch?v=1NJoW17UQhU
+)
 
 ## Meta
 
