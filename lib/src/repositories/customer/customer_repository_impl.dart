@@ -21,6 +21,7 @@ class CustomerRepositoryImpl implements CustomerRepository {
           .get('/customers', queryParameters: {'company_id': companyId});
 
       final customers = data.map((e) => CustomerModel.fromMap(e)).toList();
+      print(customers);
       return Success(customers);
     } on DioException catch (e, s) {
       log('Erro ao buscar Clientes', error: e, stackTrace: s);

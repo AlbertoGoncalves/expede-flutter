@@ -31,6 +31,7 @@ class ExpedeApp extends StatelessWidget {
       customLoader: const AppLoader(),
       builder: (asyncNavigatorObserver) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'EXPEDE',
           theme: AppTheme.themeData,
           navigatorObservers: [asyncNavigatorObserver],
